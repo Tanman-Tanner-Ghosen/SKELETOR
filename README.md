@@ -3,7 +3,8 @@ By "TANMAN TANNER" Ghosen<br>
 <br><br>
 <b>Requirements:</b>
 <br>Nodejs
-<br>discord.js package
+<br>discord.js
+<br>mysql
 <br><br>
 <b>Config</b>
 (config.json)<br>
