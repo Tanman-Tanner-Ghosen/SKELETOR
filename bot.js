@@ -1,12 +1,29 @@
 const Discord = require('discord.js');
-const { prefix, token, nsfw} = require('./config.json');
+const mysql = require('mysql');
+const { prefix, token, nsfw, thehost, theuser, thepassword} = require('./config.json');
 const client = new Discord.Client();
+
+var con = mysql.createConnection({
+  host: thehost,
+  user: theuser,
+  password: thepassword,
+});
+
+let guildArray = client.guilds.array();
 
 client.on('ready', () => {
     console.log("Logged In!");
     client.user.setActivity("For Help, Type "+prefix+"bothelp.");
 });
 
+client.on("guildCreate", guild => {
+    console.log("Joined a new guild: " + guild.name + "," + guild.id);
+})
+
+client.on("guildDelete", guild => {
+    console.log("Left a guild: " + guild.name + "," + guild.id);
+    
+})
 client.on("error", (e) => console.error(e));
 client.on("warn", (e) => console.warn(e));
 client.on("debug", (e) => console.info(e));
