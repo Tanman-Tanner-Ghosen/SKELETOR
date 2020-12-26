@@ -275,14 +275,14 @@ client.on('message', async message => {
 		{
 			var embedhelpmember = new Discord.RichEmbed()
 			.setTitle("**SKELETOR**\n")
-			.addField("Bot Help",`I am the SKELETOR Discord Bot, Version 1.666, 2019-2022 by "Tanman Tanner" Ghosen.\nPrefix for the following commands is '`+prefix+"'.\n Commands: dice, rps, 8ball, funny, kick, ban, purge, ping, bothelp");
+			.addField("Bot Help",`I am the SKELETOR Discord Bot, Version 1.666, 2019-2022 by "TANMAN TANNER" Ghosen.\nPrefix for the following commands is '`+prefix+"'.\n Commands: dice, rps, 8ball, funny, kick, ban, purge, ping, bothelp");
 			message.channel.send(embedhelpmember);
 		}
 		else
 		{
 			var embedhelpmember = new Discord.RichEmbed()
 			.setTitle("**SKELETOR**\n")
-			.addField("Bot Help",`I am the SKELETOR Discord Bot, Version 1.666, 2019-2022 by "Tanman Tanner" Ghosen.\nPrefix for the following commands is '`+prefix+"'.\n Commands: dice, rps, 8ball, kick, ban, purge, ping, bothelp");
+			.addField("Bot Help",`I am the SKELETOR Discord Bot, Version 1.666, 2019-2022 by "TANMAN TANNER" Ghosen.\nPrefix for the following commands is '`+prefix+"'.\n Commands: dice, rps, 8ball, kick, ban, purge, ping, bothelp");
 			message.channel.send(embedhelpmember);
 		}
 	}
