@@ -4,7 +4,7 @@ By "TANMAN TANNER" Ghosen<br>
 <b>Requirements:</b>
 <br>Nodejs
 <br>discord.js
-<br>Enmap
+<br>Enmap (https://enmap.evie.dev/install)
 <br><br>
 <b>Config</b>
 (config.json)<br>
