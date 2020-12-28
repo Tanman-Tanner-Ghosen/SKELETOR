@@ -21,6 +21,15 @@ client.on('ready', () => {
 	
 });
 
+client.on("guildCreate", function(guild){
+	client.user.setActivity(`${client.guilds.cache.size} Discord Servers. Ping me or use bothelp for help.`, { type: 'LISTENING' });
+});
+
+client.on("guildDelete", function(guild){
+	client.user.setActivity(`${client.guilds.cache.size} Discord Servers. Ping me or use bothelp for help.`, { type: 'LISTENING' });
+	client.settings.delete(guild.id);
+});
+
 client.on('message', async message => {
 	  const guildConf = client.settings.ensure(message.guild.id, defaultSettings);
 	if (message.mentions.has(client.user) && !message.content.includes("@here") && !message.content.includes("@everyone")) { 
