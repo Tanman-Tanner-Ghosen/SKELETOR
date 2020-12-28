@@ -243,7 +243,7 @@ client.on('message', async message => {
 		}
 		else
 		{
-			message.reply("Command has been disabled. Ask your server's admin to adjust the nsfw command to on.");
+			message.reply("Command has been disabled. Admins can reenable this command, via "+guildConf.prefix+"config nsfw 1");
 		}
 	}
 	else if(command === 'kick')
