@@ -17,23 +17,9 @@ const defaultSettings = {
 }
 client.on('ready', () => {
     console.log("Logged In!");
-	client.user.setActivity(`Serving ${client.guilds.size} servers. Use bothelp for help.`, { type: 'PLAYING' });
+	client.user.setActivity(`Serving ${client.guilds.cache.size} servers. Use bothelp for help.`, { type: 'PLAYING' });
 	
 });
-
-client.on("guildCreate", guild => {
-    console.log("Joined a new guild: " + guild.name + "," + guild.id);
-	// INSERT INTO DISCORDSET VALUES SERVERID=guild.id, PREFIX=~ AND NSFW=1
-})
-
-client.on("guildDelete", guild => {
-   console.log("Left a guild: " + guild.name + "," + guild.id);
-   // DELETE ROW WHERE SERVERID = guild.id
-   client.settings.delete(guild.id);
-})
-client.on("error", (e) => console.error(e));
-client.on("warn", (e) => console.warn(e));
-client.on("debug", (e) => console.info(e));
 
 client.on('message', async message => {
 	  const guildConf = client.settings.ensure(message.guild.id, defaultSettings);
