@@ -17,7 +17,7 @@ const defaultSettings = {
 }
 client.on('ready', () => {
     console.log("Logged In!");
-	client.user.setActivity(`Serving ${client.guilds.cache.size} servers. Use bothelp for help.`, { type: 'PLAYING' });
+	client.user.setActivity(`${client.guilds.cache.size} Discord Servers. Ping me or use bothelp for help.`, { type: 'LISTENING' });
 	
 });
 
