@@ -1,41 +1,57 @@
 const Discord = require('discord.js');
-const mysql = require('mysql');
-const { prefix, token, nsfw, thehost, theuser, thepassword} = require('./config.json');
+const Enmap = require("enmap");
+
+const {token} = require('./config.json');
 const client = new Discord.Client();
 
-var con = mysql.createConnection({
-  host: thehost,
-  user: theuser,
-  password: thepassword,
+let guildSize = client.guilds.size;
+client.settings = new Enmap({
+  name: "settings",
+  fetchAll: false,
+  autoFetch: true,
+  cloneLevel: 'deep'
 });
-
-let guildArray = client.guilds.array();
-
+const defaultSettings = {
+  prefix: "~",
+  nsfw: 1,
+}
 client.on('ready', () => {
     console.log("Logged In!");
-    client.user.setActivity("For Help, Type "+prefix+"bothelp.");
+	client.user.setActivity(`Serving ${client.guilds.size} servers. Use bothelp for help.`, { type: 'PLAYING' });
+	
 });
 
 client.on("guildCreate", guild => {
     console.log("Joined a new guild: " + guild.name + "," + guild.id);
+	// INSERT INTO DISCORDSET VALUES SERVERID=guild.id, PREFIX=~ AND NSFW=1
 })
 
 client.on("guildDelete", guild => {
-    console.log("Left a guild: " + guild.name + "," + guild.id);
-    
+   console.log("Left a guild: " + guild.name + "," + guild.id);
+   // DELETE ROW WHERE SERVERID = guild.id
+   client.settings.delete(guild.id);
 })
 client.on("error", (e) => console.error(e));
 client.on("warn", (e) => console.warn(e));
 client.on("debug", (e) => console.info(e));
 
 client.on('message', async message => {
-	if (message.isMemberMentioned(client.user) && !message.content.includes("@here") && !message.content.includes("@everyone")) { 
-      message.reply("Do you need help? Use "+prefix+"bothelp for help, otherwise hello!");
+	  const guildConf = client.settings.ensure(message.guild.id, defaultSettings);
+	if (message.mentions.has(client.user) && !message.content.includes("@here") && !message.content.includes("@everyone")) { 
+      message.reply("Do you need help? Use "+guildConf.prefix+"bothelp for help, otherwise hello!");
    }
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+	if(!message.guild || message.author.bot) return;
 
-	const args = message.content.slice(prefix.length).split(/ +/);
-	const command = args.shift().toLowerCase();
+  // We can use ensure() to actually grab the default value for settings,
+  // if the key doesn't already exist. 
+
+  // Now we can use the values! 
+  // We stop processing if the message does not start with our prefix for this guild.
+  if(message.content.indexOf(guildConf.prefix) !== 0) return;
+
+  //Then we use the config prefix to get our arguments and command:
+  const args = message.content.split(/\s+/g);
+  const command = args.shift().slice(guildConf.prefix.length).toLowerCase();
 
 	if (command === 'rps') 
 	{
@@ -133,7 +149,7 @@ client.on('message', async message => {
 		}
 		else
 		{
-			if(nsfw==1)
+			if(guildConf.nsfw==1)
 			{
 			const replies = ["Yes","No","Maybe","Ask Again",
 							 "Yea","Nah","Possibly","Try again",
@@ -161,7 +177,7 @@ client.on('message', async message => {
 	}
 	else if (command === "funny") 
 	{
-		if(nsfw==1){
+		if(guildConf.nsfw==1){
 		if (!args.length) {
 			return message.channel.send(`Valid arguments: yoda, skeletor`);
 		}
@@ -227,14 +243,14 @@ client.on('message', async message => {
 		}
 		else
 		{
-			message.reply("Command has been disabled in config.json under 'nsfw'");
+			message.reply("Command has been disabled. Ask your server's admin to adjust the nsfw command to on.");
 		}
 	}
 	else if(command === 'kick')
 	{
-		if(!message.member.roles.some(r=>["Admins", "Admin", "The Cool Kids", "Moderators","Mods","Mod","Moderator"].includes(r.name)) )
+	  if (!message.member.hasPermission(['ADMINISTRATOR'])){
       return message.reply("You lack the role requirements.");
-    
+	  }
     let member = message.mentions.members.first() || message.guild.members.get(args[0]);
     if(!member)
       return message.reply("You must provide a valid member.");
@@ -250,9 +266,9 @@ client.on('message', async message => {
 	}
 	else if(command === 'ban')
 	{
-	  if(!message.member.roles.some(r=>["Admins", "Admin","Moderators","Mods","Mod","Moderator","Staff"].includes(r.name)) )
+	  if (!message.member.hasPermission(['ADMINISTRATOR'])){
       return message.reply("You lack the role requirements.");
-    
+	  }
     let member = message.mentions.members.first();
     if(!member)
       return message.reply("You must provide a valid member.");
@@ -266,40 +282,60 @@ client.on('message', async message => {
       .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
     message.reply(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
 	}
-	else if(command === 'purge')
-	{
-	  if(!message.member.roles.some(r=>["Admins", "Admin","Moderators","Mods","Mod","Moderator","Staff"].includes(r.name)) )
-      return message.reply("You lack the role requirements.");
-    
-
-    const deleteCount = parseInt(args[0], 10);
-    
-    if(!deleteCount || deleteCount < 2 || deleteCount > 10)
-      return message.reply("Provide a number between 2 and 10 for the number of messages to delete.");
-    
-    const fetched = await message.channel.fetchMessages({limit: deleteCount});
-    message.channel.bulkDelete(fetched)
-      .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
-	}
 	else if(command === 'ping')
 	{
     const m = await message.channel.send("Fetching Ping... Wait please...");
     m.edit(`NYEEEEH! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
 	}
+	else if(command === "config") {
+    // Command is admin only, let's grab the admin value: 
+
+    // Then we'll exit if the user is not admin
+	  if (!message.member.hasPermission(['ADMINISTRATOR'])){
+      return message.reply("You lack the role requirements.");
+	  }
+		if (!args.length) {
+			return message.channel.send(`Valid arguments: prefix, nsfw`);
+		}
+    // Let's get our key and value from the arguments. 
+    // This is array destructuring, by the way. 
+    const [prop, ...value] = args;
+    // Example: 
+    // prop: "prefix"
+    // value: ["+"]
+    // (yes it's an array, we join it further down!)
+
+    // We can check that the key exists to avoid having multiple useless, 
+    // unused keys in the config:
+    if(!client.settings.has(message.guild.id, prop)) {
+      return message.reply("This key is not in the configuration.");
+    }
+
+    // Now we can finally change the value. Here we only have strings for values 
+    // so we won't bother trying to make sure it's the right type and such. 
+    client.settings.set(message.guild.id, value.join(" "), prop);
+
+    // We can confirm everything's done to the client.
+    message.channel.send(`Guild configuration item ${prop} has been changed to:\n\`${value.join(" ")}\``);
+  }
+  else if (command==="server")
+  {
+	  message.reply(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
+  }
 	else if(command === 'bothelp')
 	{
-		if(nsfw==1)
+		if(guildConf.nsfw==1)
 		{
-			var embedhelpmember = new Discord.RichEmbed()
+			var embedhelpmember = new Discord.MessageEmbed()
 			.setTitle("**SKELETOR**\n")
-			.addField("Bot Help",`I am the SKELETOR Discord Bot, Version 1.6669, 2019-2022 by "TANMAN TANNER" Ghosen.\nPrefix for the following commands is '`+prefix+"'.\n Commands: dice, rps, 8ball, funny, kick, ban, purge, ping, bothelp");
+			.addField("Bot Help",`I am the SKELETOR Discord Bot, Version 2, 2019-2022 by "TANMAN TANNER" Ghosen.\nPrefix for the following commands is '`+guildConf.prefix+"'.\n Commands: dice, rps, 8ball, funny, kick, ban, ping, bothelp, config");
 			message.channel.send(embedhelpmember);
 		}
 		else
 		{
-			var embedhelpmember = new Discord.RichEmbed()
+			var embedhelpmember = new Discord.MessageEmbed()
 			.setTitle("**SKELETOR**\n")
-			.addField("Bot Help",`I am the SKELETOR Discord Bot, Version 1.6669, 2019-2022 by "TANMAN TANNER" Ghosen.\nPrefix for the following commands is '`+prefix+"'.\n Commands: dice, rps, 8ball, kick, ban, purge, ping, bothelp");
+			.addField("Bot Help",`I am the SKELETOR Discord Bot, Version 2, 2019-2022 by "TANMAN TANNER" Ghosen.\nPrefix for the following commands is '`+guildConf.prefix+"'.\n Commands: dice, rps, 8ball, kick, ban, ping, bothelp, config");
 			message.channel.send(embedhelpmember);
 		}
 	}
