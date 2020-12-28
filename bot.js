@@ -280,7 +280,7 @@ client.on('message', async message => {
 	else if(command === 'ping')
 	{
     const m = await message.channel.send("Fetching Ping... Wait please...");
-    m.edit(`NYEEEEH! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
+    m.edit(`NYEEEEH! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms`);
 	}
 	else if(command === "config") {
     // Command is admin only, let's grab the admin value: 
