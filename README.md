@@ -9,7 +9,7 @@ By "TANMAN TANNER" Ghosen<br>
 <b>Config</b>
 (config.json)<br>
 <blockquote>{
-	"token": "",
+	"token": ""
 }
 </blockquote>
 token = bot's token for logging in
