@@ -153,7 +153,7 @@ client.on('message', async message => {
 							  "Fuck yes","Fuck no","Fucking maybe","Say it again you fucker",
 							  "Hell yeah","Hell no","Shit, maybe","Please say it again",
 							  "Very likely","Very unlikely","It can go to possibly yes or no","Could you repeat that",
-							  "Aye","Nay","Possibleth","Never fucking ask this question again you retarded fuck",
+							  "Aye","Nay","Possibleth","Never fucking ask this question again",
 							  "Ja","Negatory","I really can't say off the top of my head","Can you ask me another question"];
 				message.replytext = Math.floor((Math.random() * replies.length) + 0);
 			return message.reply(replies[message.replytext]+".");
