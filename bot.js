@@ -180,32 +180,18 @@ client.on('message', async message => {
 			{
 				const replies = [
 				"Anakin Skywalker, whiny little bitch, he is. Stand him, I cannot.",
-				"Run over people in my 2003 Honda Civic, I must.",
 				"Paid my taxes since 2003, I have not. Die in a shootout with the IRS, I will.",
 				"Put Goku in Smash, Sakurai has not. Goku, perfect for Smash, he is. Dragonball Fan, I am.",
-				"Run over people playing Pokemon Go and blame it on the liberals, I must.",
-				"Worship Ewan McGregor, I do. God-like Obi-wan, he is. Suck him off, I would.",
-				"Overdosed on ketamine, I have. Medical assistance, I need. Dying, I am.",
-				"Play League of Legends on my smurf, I will. Call someone the n-word, I definitely shall.",
+				"Worship Ewan McGregor, I do. God-like Obi-wan, he is.",
 				"Do or do not, there is no trying ketamine without addiction.",
 				"Luke, deep into the Dagobah forest he went. Killed my neighbor dressed up as Darth Vader. Horrified, I was.",
 				"Mortal enemy, Darth Jar Jar is. Powerful with the dark side of memes, he is.",
 				"Food machine, broke it is. Understandable, that is.",
-				"Rise of Skywalker, saw I did. My impersonator, shitty he was. Support women, I would not.",
-				"If into the deep web you go, only dead bodies will you find.",
 				"Saucy boy, you are. What, egg you are? Stab him, I did.",
-				"Make American Great Again, I will. Wear orange makeup and a blond wig, I will.",
-				"Mom, found my cumsock she did. Dead, I fucking am.",
-				"Allah, angry at me for not successfully commiting a worthy jihad against the Jedi Temple, he is.",
 				"Baby Yoda, fucking little punk he is. Call me a fucking boomer, he did.",
-				"If a woman breathes, a thot she is. A queen, she will never be.",
-				"Anakin Skywalker, afraid of losing his wife, he is? Boo fucking hoo, that is, lost my shins in Vietnam, I did.",
 				"Obi-Wan, dumbass he is. Turned my Deathstick dealer to a good dude, he did. How the fuck will I get Deathsticks, I do not know.",
 				"Deny Anakin Skywalker the rank of Master, I did. Very funny, his reaction was. Murdering the younglings, not so funny that was.",
-				"Tanman Tanner, shitty at coding Discord bots he is. A clusterfuck source code, I do have.", // :)
-				"Hah, Crush my cock with a rock, I must. Maximum pain, I must endure. Okay, here we go. *incomprehensible screaming*",
 				"Deathsticks is the path to the Ketamine addiction. Deathsticks leads to Bantha bile. Bantha bile leads to Namana liquor. Namana liquor leads to Ketamine.",
-				"Go, die in a shootout with police over my ketamine in my 2003 Honda Civic I will.",
 				"Backflip I do, responsible for war crimes I am.",
 				"Hee hee hoo hoo little creature I am. Oooooo huuhuhuhu."
 				];
