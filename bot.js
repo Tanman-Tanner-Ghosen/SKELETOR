@@ -309,14 +309,14 @@ client.on('message', async message => {
 		{
 			var embedhelpmember = new Discord.MessageEmbed()
 			.setTitle("**SKELETOR**\n")
-			.addField("Bot Help",`I am the SKELETOR Discord Bot, Version 2, 2019-2022 by "TANMAN TANNER" Ghosen.\nPrefix for the following commands is '`+guildConf.prefix+"'.\n Commands: dice, rps, 8ball, funny, kick, ban, ping, bothelp, config");
+			.addField("Bot Help",`I am the SKELETOR Discord Bot, Version 2, 2019-2022 by "Tanman Tanner" Ghosen.\nPrefix for the following commands is '`+guildConf.prefix+"'.\n Commands: dice, rps, 8ball, funny, kick, ban, ping, bothelp, config");
 			message.channel.send(embedhelpmember);
 		}
 		else
 		{
 			var embedhelpmember = new Discord.MessageEmbed()
 			.setTitle("**SKELETOR**\n")
-			.addField("Bot Help",`I am the SKELETOR Discord Bot, Version 2, 2019-2022 by "TANMAN TANNER" Ghosen.\nPrefix for the following commands is '`+guildConf.prefix+"'.\n Commands: dice, rps, 8ball, kick, ban, ping, bothelp, config");
+			.addField("Bot Help",`I am the SKELETOR Discord Bot, Version 2, 2019-2022 by "Tanman Tanner" Ghosen.\nPrefix for the following commands is '`+guildConf.prefix+"'.\n Commands: dice, rps, 8ball, kick, ban, ping, bothelp, config");
 			message.channel.send(embedhelpmember);
 		}
 	}
