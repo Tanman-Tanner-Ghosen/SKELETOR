@@ -1,5 +1,5 @@
 # SKELETOR
-By "TANMAN TANNER" Ghosen<br>
+By "Tanman Tanner" Ghosen<br>
 <br><br>
 <b>Requirements:</b>
 <br>Nodejs
