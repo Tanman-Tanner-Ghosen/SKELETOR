@@ -299,20 +299,24 @@ client.on('message', async message => {
     // We can confirm everything's done to the client.
     message.channel.send(`Guild configuration item ${prop} has been changed to:\n\`${value.join(" ")}\``);
   }
+  else if (command==="server")
+  {
+	  message.reply(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
+  }
 	else if(command === 'bothelp')
 	{
 		if(guildConf.nsfw==1)
 		{
 			var embedhelpmember = new Discord.MessageEmbed()
-			.setTitle("**SKELETOR**\n")
-			.addField("Bot Help",`I am the SKELETOR Discord Bot, Version 2, 2019-2022 by "Tanman Tanner" Ghosen.\nPrefix for the following commands is '`+guildConf.prefix+"'.\n Commands: dice, rps, 8ball, funny, kick, ban, ping, bothelp, config");
+			.setTitle("**Skeletor**\n")
+			.addField("Bot Help",`I am the Skeletor Discord Bot, Version 2, 2019-2022 by "Tanman Tanner" Ghosen.\nPrefix for the following commands is '`+guildConf.prefix+"'.\n Commands: dice, rps, 8ball, funny, kick, ban, ping, bothelp, config");
 			message.channel.send(embedhelpmember);
 		}
 		else
 		{
 			var embedhelpmember = new Discord.MessageEmbed()
-			.setTitle("**SKELETOR**\n")
-			.addField("Bot Help",`I am the SKELETOR Discord Bot, Version 2, 2019-2022 by "Tanman Tanner" Ghosen.\nPrefix for the following commands is '`+guildConf.prefix+"'.\n Commands: dice, rps, 8ball, kick, ban, ping, bothelp, config");
+			.setTitle("**Skeletor**\n")
+			.addField("Bot Help",`I am the Skeletor Discord Bot, Version 2, 2019-2022 by "Tanman Tanner" Ghosen.\nPrefix for the following commands is '`+guildConf.prefix+"'.\n Commands: dice, rps, 8ball, kick, ban, ping, bothelp, config");
 			message.channel.send(embedhelpmember);
 		}
 	}
