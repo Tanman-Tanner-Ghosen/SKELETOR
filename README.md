@@ -1,4 +1,4 @@
-# SKELETOR
+# Skeletor
 By "Tanman Tanner" Ghosen<br>
 <br><br>
 <b>Requirements:</b>
@@ -9,7 +9,7 @@ By "Tanman Tanner" Ghosen<br>
 <b>Config</b>
 (config.json)<br>
 <blockquote>{
-	"token": ""
+	"token": "",
 }
 </blockquote>
 token = bot's token for logging in
