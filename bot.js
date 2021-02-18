@@ -299,10 +299,6 @@ client.on('message', async message => {
     // We can confirm everything's done to the client.
     message.channel.send(`Guild configuration item ${prop} has been changed to:\n\`${value.join(" ")}\``);
   }
-  else if (command==="server")
-  {
-	  message.reply(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
-  }
 	else if(command === 'bothelp')
 	{
 		if(guildConf.nsfw==1)
