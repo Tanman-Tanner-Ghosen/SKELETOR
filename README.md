@@ -1,4 +1,4 @@
-# Skeletor
+# Skeleton
 By "Tanman Tanner" Ghosen<br>
 <br><br>
 <b>Requirements:</b>
