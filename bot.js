@@ -304,15 +304,15 @@ client.on('message', async message => {
 		if(guildConf.nsfw==1)
 		{
 			var embedhelpmember = new Discord.MessageEmbed()
-			.setTitle("**Skeletor**\n")
-			.addField("Bot Help",`I am the Skeletor Discord Bot, Version 2, 2019-2022 by "Tanman Tanner" Ghosen.\nPrefix for the following commands is '`+guildConf.prefix+"'.\n Commands: dice, rps, 8ball, funny, kick, ban, ping, bothelp, config");
+			.setTitle("**Skeleton**\n")
+			.addField("Bot Help",`I am the Skeleton Discord Bot, Version 2, 2019-2022 by "Tanman Tanner" Ghosen.\nPrefix for the following commands is '`+guildConf.prefix+"'.\n Commands: dice, rps, 8ball, funny, kick, ban, ping, bothelp, config");
 			message.channel.send(embedhelpmember);
 		}
 		else
 		{
 			var embedhelpmember = new Discord.MessageEmbed()
-			.setTitle("**Skeletor**\n")
-			.addField("Bot Help",`I am the Skeletor Discord Bot, Version 2, 2019-2022 by "Tanman Tanner" Ghosen.\nPrefix for the following commands is '`+guildConf.prefix+"'.\n Commands: dice, rps, 8ball, kick, ban, ping, bothelp, config");
+			.setTitle("**Skeleton**\n")
+			.addField("Bot Help",`I am the Skeleton Discord Bot, Version 2, 2019-2022 by "Tanman Tanner" Ghosen.\nPrefix for the following commands is '`+guildConf.prefix+"'.\n Commands: dice, rps, 8ball, kick, ban, ping, bothelp, config");
 			message.channel.send(embedhelpmember);
 		}
 	}
